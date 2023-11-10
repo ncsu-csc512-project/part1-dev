@@ -12,31 +12,39 @@
 
 using namespace llvm;
 
-namespace
-{
+namespace {
 
-    void visitor(Function &F)
-    {
-        errs() << "Analyzing function " << F.getName() << '\n';
-
-        for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I)
-        {
-            Instruction *Inst = &*I;
-
-            if (BranchInst *BI = dyn_cast<BranchInst>(Inst))
-            {
-                errs() << "Found a branch instruction!\n";
-                // TODO: Instrument code to log branch
-            }
-
-            // TODO: Add detection and logging for function pointers
+    void logBranchInstruction(BranchInst *BI) {
+        if (BI->isConditional()) {
+            errs() << "br_" << BI->getParent()->getName() << "\n";
         }
     }
 
-    struct BranchPointerPass : PassInfoMixin<BranchPointerPass>
-    {
-        PreservedAnalyses run(Function &F, FunctionAnalysisManager &)
-        {
+    void logFunctionPointer(CallInst *CI) {
+        if (Function *calledFunction = CI->getCalledFunction()) {
+            errs() << "*func_" << calledFunction << "\n";
+        }
+    }
+
+    void visitor(Function &F) {
+        errs() << "Analyzing function " << F.getName() << '\n';
+
+        for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
+            Instruction *Inst = &*I;
+
+            if (BranchInst *BI = dyn_cast<BranchInst>(Inst)) {
+                errs() << "Found a branch instruction!\n";
+                logBranchInstruction(BI);
+            }
+
+            if (CallInst *CI = dyn_cast<CallInst>(Inst)) {
+                logFunctionPointer(CI);
+            }
+        }
+    }
+
+    struct BranchPointerPass : PassInfoMixin<BranchPointerPass> {
+        PreservedAnalyses run(Function &F, FunctionAnalysisManager &) {
             visitor(F);
             return PreservedAnalyses::all();
         }
@@ -46,16 +54,12 @@ namespace
 
 } // namespace
 
-llvm::PassPluginLibraryInfo getBranchPointerPluginInfo()
-{
+llvm::PassPluginLibraryInfo getBranchPointerPluginInfo() {
     return {LLVM_PLUGIN_API_VERSION, "BranchPointerPass", LLVM_VERSION_STRING,
-            [](PassBuilder &PB)
-            {
+            [](PassBuilder &PB) {
                 PB.registerPipelineParsingCallback(
-                    [](StringRef Name, FunctionPassManager &FPM, ArrayRef<PassBuilder::PipelineElement>)
-                    {
-                        if (Name == "branch-pointer-pass")
-                        {
+                    [](StringRef Name, FunctionPassManager &FPM, ArrayRef<PassBuilder::PipelineElement>) {
+                        if (Name == "branch-pointer-pass") {
                             FPM.addPass(BranchPointerPass());
                             return true;
                         }
@@ -64,7 +68,6 @@ llvm::PassPluginLibraryInfo getBranchPointerPluginInfo()
             }};
 }
 
-extern "C" ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo()
-{
+extern "C" ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
     return getBranchPointerPluginInfo();
 }
