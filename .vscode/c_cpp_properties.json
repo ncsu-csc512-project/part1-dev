@@ -16,5 +16,5 @@
             "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
-    "version": 4
+    "version": 4,
 }
