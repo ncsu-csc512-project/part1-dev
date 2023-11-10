@@ -16,7 +16,8 @@ namespace {
 
     void logBranchInstruction(BranchInst *BI) {
         if (BI->isConditional()) {
-            errs() << "br_" << BI->getParent()->getName() << "\n";
+            // Unique identifier for branch, e.g., using the address of the instruction
+            errs() << "br_" << BI << "\n";
         }
     }
 
