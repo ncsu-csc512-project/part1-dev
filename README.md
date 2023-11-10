@@ -9,7 +9,7 @@ This README outlines the steps to compile and build the LLVM pass for branch and
 
 Learn more [here](./objective.md).
 
-Teddy Xinyuan Chen's dev branch: [teddy-dev](https://github.com/ncsu-csc512-project/part1-dev/tree/teddy-dev)
+<!-- Teddy Xinyuan Chen's dev branch: [teddy-dev](https://github.com/ncsu-csc512-project/part1-dev/tree/teddy-dev) -->
 
 ## Prerequisites
 - LLVM >= 16.0 installed
