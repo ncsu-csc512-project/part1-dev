@@ -59,8 +59,8 @@ $ make
 export LLVM_DIR=/usr/local/opt/llvm
 mkdir -p build
 cmake -DMY_LLVM_INSTALL_DIR=/usr/local/opt/llvm -S . -B build && cmake --build build
--- Configuring done (0.3s)
--- Generating done (0.0s)
+-- Configuring done (0.4s)
+-- Generating done (0.1s)
 -- Build files have been written to: /Users/tscp/testdir/csc512-proj/part1-dev/build
 gmake[1]: Entering directory '/Users/tscp/testdir/csc512-proj/part1-dev/build'
 [ 50%] Building CXX object BranchPointerPass/CMakeFiles/BranchPointerPass.dir/BranchPointerPass.cpp.o
@@ -68,20 +68,27 @@ gmake[1]: Entering directory '/Users/tscp/testdir/csc512-proj/part1-dev/build'
 [100%] Built target BranchPointerPass
 gmake[1]: Leaving directory '/Users/tscp/testdir/csc512-proj/part1-dev/build'
 opt -load-pass-plugin ./build/BranchPointerPass/libBranchPointerPass.so -passes=branch-pointer-pass -disable-output inputs/input.ll
-Analyzing function foo
-*func_0x6000011d4208
-Analyzing function bar
-*func_0x6000011d4208
-Analyzing function main
-Found a branch instruction!
-Found a branch instruction!
-br_0x600000ed8060
-Found a branch instruction!
-br_0x600000ed8100
-Found a branch instruction!
-Found a branch instruction!
-Found a branch instruction!
-Found a branch instruction!
+br_1: inputs/input.c, 19, 21
+br_2: inputs/input.c, 21, 23
 # opt -load-pass-plugin ./build/BranchPointerTracePass/libBranchPointerTracePass.so -passes=branch-pointer-trace -disable-output inputs/input.ll
 # opt -load-pass-plugin ./build/BranchPointerTracePass/libBranchPointerTracePass.so -passes=branch-pointer-trace -disable-output inputs/input.ll
+```
+
+`dict.json` file generated when running the pass for storing the branching info:
+
+```json
+[
+    {
+        "branch_id": 1,
+        "dest_lno": 21,
+        "filename": "inputs/input.c",
+        "src_lno": 19
+    },
+    {
+        "branch_id": 2,
+        "dest_lno": 23,
+        "filename": "inputs/input.c",
+        "src_lno": 21
+    }
+]
 ```
