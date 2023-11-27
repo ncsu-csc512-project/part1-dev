@@ -101,9 +101,9 @@ attributes #2 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protect
 !13 = !{i32 8, !"PIC Level", i32 2}
 !14 = !{i32 7, !"uwtable", i32 2}
 !15 = !{i32 7, !"frame-pointer", i32 2}
-!16 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 17.0.4", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !17, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk", sdk: "MacOSX.sdk")
+!16 = distinct !DICompileUnit(language: DW_LANG_C11, file: !2, producer: "Homebrew clang version 17.0.5", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, globals: !17, splitDebugInlining: false, nameTableKind: Apple, sysroot: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk", sdk: "MacOSX.sdk")
 !17 = !{!0, !7}
-!18 = !{!"Homebrew clang version 17.0.4"}
+!18 = !{!"Homebrew clang version 17.0.5"}
 !19 = distinct !DISubprogram(name: "foo", scope: !2, file: !2, line: 3, type: !20, scopeLine: 4, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !16, retainedNodes: !23)
 !20 = !DISubroutineType(types: !21)
 !21 = !{null, !22}

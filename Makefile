@@ -14,6 +14,7 @@ all: run
 inputs/input.ll: inputs/input.c
 	# clang -S -emit-llvm inputs/input.c -o inputs/input.ll -g -O0
 	$(CLANG_COMMAND) -S -emit-llvm inputs/input.c -o inputs/input.ll -g -O0 
+	# $(CLANG_COMMAND) -S -emit-llvm inputs/input.c -o inputs/input.ll -g 
 	# clang -S -emit-llvm inputs/input.c -o inputs/input.ll
 	
 # $(REPO_DIR):
