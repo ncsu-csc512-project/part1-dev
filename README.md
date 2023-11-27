@@ -156,6 +156,7 @@ Running on Ubuntu 22.04 on VCL
 
 ```
 # ./input is compiled from `inputs/input.c` using g++
+# running from the root of the valgrind dir
 $ inst/bin/valgrind --tool=branch ./input
 
 ==2502571== Branch, a binary profiling tool to count instructions
