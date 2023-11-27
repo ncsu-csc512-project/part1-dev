@@ -1,3 +1,5 @@
+inputs/example
+callgrind.out*
 build/
 
 CMakeLists.txt.user
