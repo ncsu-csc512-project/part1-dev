@@ -1,6 +1,6 @@
-# Part 1 Key Points Detection
+# Part 1 Key Points Detection LLVM Pass & Valgrind Instruction Count Tool
 
-- [Part 1 Key Points Detection](#part-1-key-points-detection)
+- [Part 1 Key Points Detection LLVM Pass \& Valgrind Instruction Count Tool](#part-1-key-points-detection-llvm-pass--valgrind-instruction-count-tool)
   - [General Project Submission Info](#general-project-submission-info)
   - [Overview](#overview)
   - [Project Structure](#project-structure)
