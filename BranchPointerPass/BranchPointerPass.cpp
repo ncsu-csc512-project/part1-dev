@@ -25,7 +25,9 @@ std::unordered_map<BranchInst *, int> branchIds;
 Json jsonBranches;
 int branchIdCounter = 1;
 
-void logBranchInstruction(BranchInst *BI, const std::string &filename) {
+// ... [previous includes and namespace declarations]
+
+void logBranchInstruction(BranchInst *BI, const std::string &filepath) {
   if (BI->isConditional()) {
     if (branchIds.find(BI) == branchIds.end()) {
       branchIds[BI] = branchIdCounter++;
@@ -43,7 +45,7 @@ void logBranchInstruction(BranchInst *BI, const std::string &filename) {
       }
     }
 
-    jsonBranches.push_back({{"filename", filename},
+    jsonBranches.push_back({{"filepath", filepath},
                             {"branch_id", id},
                             {"src_lno", srcLine},
                             {"dest_lno", destLine}});
@@ -51,15 +53,15 @@ void logBranchInstruction(BranchInst *BI, const std::string &filename) {
 }
 
 void visitor(Function &F) {
-  std::string filename;
+  std::string filepath;
   if (DISubprogram *SP = F.getSubprogram()) {
-    filename = SP->getFile()->getFilename().str();
+    filepath = SP->getDirectory().str() + "/" + SP->getFilename().str();
   }
 
   for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
     Instruction *Inst = &*I;
     if (BranchInst *BI = dyn_cast<BranchInst>(Inst)) {
-      logBranchInstruction(BI, filename);
+      logBranchInstruction(BI, filepath);
     }
   }
 }
@@ -95,6 +97,7 @@ extern "C" ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
 }
 
 // ... [previous includes and namespace declarations]
+// ... [BranchPointerPass struct and getBranchPointerPluginInfo function]
 
 struct JsonFileWriter {
   ~JsonFileWriter() {
@@ -102,10 +105,10 @@ struct JsonFileWriter {
     file << jsonBranches.dump(4);
     file.close();
 
-    // Output the branch information in the desired format
+    // Output the branch information with full file path in the desired format
     for (const auto &branch : jsonBranches) {
       errs() << "br_" << branch["branch_id"].get<int>() << ": ";
-      errs() << branch["filename"].get<std::string>() << ", ";
+      errs() << branch["filepath"].get<std::string>() << ", ";
       errs() << branch["src_lno"].get<int>() << ", ";
       errs() << branch["dest_lno"].get<int>() << "\n";
     }
