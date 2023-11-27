@@ -16,6 +16,13 @@ Learn more [here](./objective.md).
 - CMake installed
 - C++ compiler (e.g., g++, clang)
 
+### 3rd party libraries
+
+install these libraries and include your include paths on your system to `BranchPointerPass/CMakeLists.txt`:
+
+- nlohmann-json
+
+
 
 
 
