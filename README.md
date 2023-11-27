@@ -31,15 +31,15 @@ Learn more [here](./objective.md).
 
 ```
 .
-├── branch # valgrind directory
-│  └── br_main.c # custom valgrind tool to count instructions
+├── branch                     # valgrind directory
+│  └── br_main.c               # custom valgrind tool to count instructions
 ├── BranchPointerPass
-│  ├── BranchPointerPass.cpp # LLVM pass code for key points detection
+│  ├── BranchPointerPass.cpp   # LLVM pass code for key points detection
 │  └── CMakeLists.txt
-├── build # build directory
+├── build                      # build directory
 ├── CMakeLists.txt
 ├── inputs
-│  └── input.c # trivial c program for testing LLVM pass
+│  └── input.c                 # trivial c program for testing LLVM pass
 ├── Makefile
 ├── objective.md
 └── README.md
