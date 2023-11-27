@@ -1,4 +1,5 @@
 inputs/example
+inputs/input
 dict.json
 callgrind.out*
 build/
