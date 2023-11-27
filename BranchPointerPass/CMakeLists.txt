@@ -11,7 +11,7 @@ if("${LLVM_VERSION_MAJOR}" VERSION_LESS 16)
 endif()
 
 # HelloWorld includes headers from LLVM - update the include paths accordingly
-include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+include_directories(SYSTEM ${LLVM_INCLUDE_DIRS} /usr/local/include)
 
 # Use the same C++ standard as LLVM does
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "")

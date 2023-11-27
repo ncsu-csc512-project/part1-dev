@@ -1,7 +1,7 @@
 
 # Default LLVM installation directory
 LLVM_DIR ?= /usr/local/opt/llvm
-CLANG_COMMAND ?= clang
+CLANG_COMMAND ?= clang -I/usr/local/include
 OPT_COMMAND ?= opt
 
 # Target for cloning the repository
