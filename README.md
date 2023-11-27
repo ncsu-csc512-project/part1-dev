@@ -3,6 +3,7 @@
 - [Part 1 Key Points Detection](#part-1-key-points-detection)
   - [General Project Submission Info](#general-project-submission-info)
   - [Overview](#overview)
+  - [Project Structure](#project-structure)
   - [Prerequisites](#prerequisites)
     - [3rd party libraries](#3rd-party-libraries)
   - [Build the Pass](#build-the-pass)
@@ -26,6 +27,29 @@ Learn more [here](./objective.md).
 
 <!-- Teddy Xinyuan Chen's dev branch: [teddy-dev](https://github.com/ncsu-csc512-project/part1-dev/tree/teddy-dev) -->
 
+## Project Structure
+
+```
+.
+├── branch # valgrind directory
+│  └── br_main.c # custom valgrind tool to count instructions
+├── BranchPointerPass
+│  ├── BranchPointerPass.cpp # LLVM pass code for key points detection
+│  └── CMakeLists.txt
+├── build # build directory
+├── CMakeLists.txt
+├── inputs
+│  └── input.c # trivial c program for testing LLVM pass
+├── Makefile
+├── objective.md
+└── README.md
+```
+
+Things to lookout for when running the pass:
+- Make sure [nlohmann-json](https://github.com/nlohmann/json) is installed
+- Make sure the LLVM include dir and [nlohmann-json](https://github.com/nlohmann/json) include dir are included in `BranchPointerPass/CMakeLists.txt`
+
+
 ## Prerequisites
 - LLVM >= 16.0 installed
 - CMake installed
@@ -35,7 +59,7 @@ Learn more [here](./objective.md).
 
 install these libraries and include your include paths on your system to `BranchPointerPass/CMakeLists.txt`:
 
-- nlohmann-json
+- [nlohmann-json](https://github.com/nlohmann/json)
 
 
 
