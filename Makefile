@@ -39,4 +39,10 @@ run: build
 clean:
 	rm -rf build
 
-.PHONY: all clone setup build run clean
+sync-to-submission-repo-dryrun:
+	rsync -au --delete --progress -h --include-from='include.txt' ./ ../part1-submission/ -n
+
+sync-to-submission-repo:
+	rsync -au --delete --progress -h --include-from='include.txt' ./ ../part1-submission/
+
+.PHONY: all clone setup build run clean sync-to-submission-repo*
