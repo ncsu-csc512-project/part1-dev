@@ -1,5 +1,7 @@
 + branch/
++ branch/**
 + BranchPointerPass/
++ BranchPointerPass/*
 + CMakeLists.txt
 + inputs/input.c
 + Makefile
