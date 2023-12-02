@@ -50,11 +50,11 @@ prereq:
 build: prereq setup build_dir
 	# if not on linux
 	# check UNAME_S
-	if [[ "$(UNAME_S)" != "Linux" ]]; then \
-		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build && cmake --build build \
+	if [ "$(UNAME_S)" != "Linux" ]; then \
+		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build && cmake --build build; \
 	else \
 		VCPKG_CMAKE="$$(scripts/setup-vcpkg.sh)" && \
-		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build -DCMAKE_TOOLCHAIN_FILE="$${VCPKG_CMAKE}" && cmake --build build \
+		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build -DCMAKE_TOOLCHAIN_FILE="$${VCPKG_CMAKE}" && cmake --build build; \
 	fi
 	
 
