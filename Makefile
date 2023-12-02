@@ -44,5 +44,8 @@ sync-to-submission-repo-dryrun:
 
 sync-to-submission-repo:
 	rsync -au --delete --progress -h --include-from='include.txt' ./ ../part1-submission/
+	
+update-vcl:
+	rsync -au --progress -h . vcl:1 --exclude 'build' --exclude '.git'
 
 .PHONY: all clone setup build run clean sync-to-submission-repo*
