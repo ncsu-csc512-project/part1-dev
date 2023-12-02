@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ -f ~/tmpdir/vcpkg/scripts/buildsystems/vcpkg.cmake ]]; then
+    echo ~/tmpdir/vcpkg/scripts/buildsystems/vcpkg.cmake
+    exit 0
+fi
 mkdir -p ~/tmpdir
 cd ~/tmpdir || exit
 # if vcpkg is there, then rm -rf vcpkg

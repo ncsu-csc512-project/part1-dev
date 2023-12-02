@@ -17,7 +17,13 @@ if(NOT LLVM_ENABLE_RTTI)
 endif()
 
 # Find the nlohmann_json package
-find_package(nlohmann_json 3.2.0 REQUIRED)
+# find_package(nlohmann_json 3.2.0 REQUIRED)
+# if on linux
+if(UNIX AND NOT APPLE)
+    include(~/tmpdir/vcpkg/scripts/buildsystems/vcpkg.cmake)
+endif()
+find_package(nlohmann_json CONFIG REQUIRED)
+    # target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
 
 add_library(BranchPointerPass MODULE
     BranchPointerPass.cpp
