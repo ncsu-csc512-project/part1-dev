@@ -58,7 +58,7 @@ build: prereq setup build_dir
 	fi
 	
 
-run: build
+run: build inputs/input.ll
 	$(OPT_COMMAND) -load-pass-plugin ./build/BranchPointerPass/libBranchPointerPass.so -passes=branch-pointer-pass -disable-output inputs/input.ll
 
 clean:

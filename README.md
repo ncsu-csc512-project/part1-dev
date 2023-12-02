@@ -93,7 +93,7 @@ make build
 After building, you should have a `libBranchPointerPass.so` file in your `build` directory. To run the pass, use LLVM's `opt` tool as follows:
 ```bash
 # opt -load-pass-plugin ./build/BranchPointerPass/libBranchPointerPass.so -passes=branch-pointer-pass -disable-output inputs/input.ll
-make
+make run
 # you can specify the LLVM installation directory and clang and opt commands as follows:
 # make LLVM_DIR=/usr/lib/llvm-17 CLANG_COMMAND=/usr/bin/clang-17 OPT_COMMAND=/usr/bin/opt-17
 ```
