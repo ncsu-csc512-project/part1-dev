@@ -44,17 +44,22 @@ build_dir:
 prereq:
 	# if on ubuntu and clang-17 not found, run scripts/ubuntu-install-llvm.sh
 	if [ ! -f $(CLANG_COMMAND) ]; then echo "clang-17 not found. Run scripts/ubuntu-install-llvm.sh to install it"; exit 1; fi
-	# if on linux and vcpkg not found, install vcpkg
 	
 
 
 build: prereq setup build_dir
-	cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build && cmake --build build
+	# if not on linux
+	# check UNAME_S
+	if [[ "$(UNAME_S)" != "Linux" ]]; then
+		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build && cmake --build build
+	else
+		VCPKG_CMAKE="$$(scripts/setup-vcpkg.sh)"
+		cmake -DMY_LLVM_INSTALL_DIR=$(LLVM_DIR) -S . -B build -DCMAKE_TOOLCHAIN_FILE="$${VCPKG_CMAKE}" && cmake --build build
+	fi
+	
 
 run: build
 	$(OPT_COMMAND) -load-pass-plugin ./build/BranchPointerPass/libBranchPointerPass.so -passes=branch-pointer-pass -disable-output inputs/input.ll
-	# opt -load-pass-plugin ./build/BranchPointerTracePass/libBranchPointerTracePass.so -passes=branch-pointer-trace -disable-output inputs/input.ll
-	# $(OPT_COMMAND) -load-pass-plugin ./build/BranchPointerTracePass/libBranchPointerTracePass.so -passes=branch-pointer-trace -disable-output inputs/input.ll
 
 clean:
 	rm -rf build
