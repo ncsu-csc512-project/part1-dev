@@ -4,6 +4,7 @@ archs
 ARGN
 armv
 atexit
+autogen
 buildsystems
 CACHEFILE
 ccmake
@@ -105,9 +106,12 @@ tmpdir
 TOOLSET
 toolset
 tscp
+Valgrind
+valgrind
 vcpkg
 Wdeprecated
 Werror
 Wundef
 Wunused
+Xinyuan
 zstd
