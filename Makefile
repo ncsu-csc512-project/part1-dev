@@ -23,6 +23,8 @@ REPO_DIR = part1-dev
 all: run
 
 
+install-deps-on-ubuntu:
+	sudo apt install tmux cmake fd-find -y
 
 inputs/input.ll: inputs/input.c
 	# clang -S -emit-llvm inputs/input.c -o inputs/input.ll -g -O0
