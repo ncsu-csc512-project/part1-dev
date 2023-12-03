@@ -15,6 +15,8 @@ TOOLS = \
 		none \
 		branch
 
+TOOLS = branch
+
 EXP_TOOLS = \
 		exp-bbv
 
