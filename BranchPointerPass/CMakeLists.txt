@@ -2,6 +2,11 @@ set(LT_LLVM_INSTALL_DIR "" CACHE PATH "LLVM installation directory")
 
 list(APPEND CMAKE_PREFIX_PATH "${LT_LLVM_INSTALL_DIR}/lib/cmake/llvm/")
 
+if(UNIX AND NOT APPLE)
+    set(LLVM_DIR /usr/lib/llvm-17)
+    list(APPEND CMAKE_PREFIX_PATH /usr/lib/llvm-17/lib/cmake/llvm/)
+    include(~/tmpdir/vcpkg/scripts/buildsystems/vcpkg.cmake)
+endif()
 find_package(LLVM CONFIG)
 if("${LLVM_VERSION_MAJOR}" VERSION_LESS 16)
   message(FATAL_ERROR "Found LLVM ${LLVM_VERSION_MAJOR}, but need LLVM 16 or above")
@@ -19,9 +24,6 @@ endif()
 # Find the nlohmann_json package
 # find_package(nlohmann_json 3.2.0 REQUIRED)
 # if on linux
-if(UNIX AND NOT APPLE)
-    include(~/tmpdir/vcpkg/scripts/buildsystems/vcpkg.cmake)
-endif()
 find_package(nlohmann_json CONFIG REQUIRED)
     # target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
 

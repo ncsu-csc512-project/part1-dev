@@ -43,7 +43,7 @@ build_dir:
 
 prereq:
 	# if on ubuntu and clang-17 not found, run scripts/ubuntu-install-llvm.sh
-	if [ ! -f $(CLANG_COMMAND) ]; then echo "clang-17 not found. Run scripts/ubuntu-install-llvm.sh to install it"; exit 1; fi
+	if [ ! -f $(CLANG_COMMAND) ]; then echo ./scripts/ubuntu-install-llvm.sh; fi
 	
 
 
