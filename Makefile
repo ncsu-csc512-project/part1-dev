@@ -73,4 +73,7 @@ sync-to-submission-repo:
 update-vcl:
 	rsync -au --progress -h . vcl:1 --exclude 'build' --exclude '.git'
 
+update-vcl2:
+	rsync -au --progress -h . vcl2:1 --exclude 'build' --exclude '.git'
+
 .PHONY: all clone setup build run clean sync-to-submission-repo* prereq
