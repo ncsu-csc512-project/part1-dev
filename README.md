@@ -166,6 +166,11 @@ See `./branch`
 git clone https://sourceware.org/git/valgrind.git && cd valgrind
 
 # copy `./branch` dir, ./valgrind-extra/* to `valgrind` dir
+# cp -vr "$REPO_ROOT/branch" .
+# VALGRIND_EXTRA_DIR="$REPO_ROOT/valgrind-extra"
+# cp -vf "$VALGRIND_EXTRA_DIR/configure.ac" .
+# cp -vf "$VALGRIND_EXTRA_DIR/Makefile.am" .
+
 
 # then run these from the root of the valgrind dir
 ./autogen.sh
