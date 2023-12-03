@@ -2,6 +2,10 @@
 + branch/**
 + BranchPointerPass/
 + BranchPointerPass/*
++ scripts/
++ scripts/*
++ valgrind-extra/
++ valgrind-extra/*
 + CMakeLists.txt
 + inputs/
 + inputs/input.c
