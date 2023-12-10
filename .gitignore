@@ -1,3 +1,4 @@
+tests/*.ll
 CMakePresets.json
 *.cmake
 *conan*
