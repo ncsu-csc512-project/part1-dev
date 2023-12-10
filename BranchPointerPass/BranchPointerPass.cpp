@@ -62,6 +62,15 @@ void logBranchInstruction(BranchInst *BI, const std::string &filepath) {
   }
 }
 
+void logFunctionPointer(CallInst *CI) {
+  if (CI->isIndirectCall()) {
+    Value *calledValue = CI->getCalledOperand();
+    if (calledValue) {
+      errs() << "*funcptr_" << calledValue << "\n";
+    }
+  }
+}
+
 void visitor(Function &F) {
   std::string filepath;
   if (DISubprogram *SP = F.getSubprogram()) {
@@ -70,8 +79,13 @@ void visitor(Function &F) {
 
   for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
     Instruction *Inst = &*I;
+
     if (BranchInst *BI = dyn_cast<BranchInst>(Inst)) {
       logBranchInstruction(BI, filepath);
+    }
+
+    if (CallInst *CI = dyn_cast<CallInst>(Inst)) {
+      logFunctionPointer(CI);
     }
   }
 }
